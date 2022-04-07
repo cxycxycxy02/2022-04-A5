@@ -1,0 +1,1 @@
+insert into user (firstName, lastName, phone, account, password) values ('1', '1','1','1','1');
