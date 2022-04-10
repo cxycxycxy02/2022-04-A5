@@ -6,6 +6,7 @@ import java.util.TreeMap;
 public class Customer extends User{
     private Integer credit;
     private Integer rating;
+
     private Map<String,Order> orders;
 
     public Map<String, Order> getOrders() {

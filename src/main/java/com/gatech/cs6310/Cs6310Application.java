@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 
-@SpringBootApplication()
+@SpringBootApplication
 public class Cs6310Application {
 
     public static void main(String[] args) {
