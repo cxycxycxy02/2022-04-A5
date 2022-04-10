@@ -17,6 +17,7 @@ public class LoginService {
 
     public UserResponse passwordVerify(String account, String password){
         UserResponse.UserResponseBuilder userResponse = UserResponse.builder();
+        System.out.println(account);
         UserCommon user =  logMapper.userInquiryByAccount(account);
         if (Objects.isNull(user)){
             userResponse.errorMessage("ERROR:user_identifier_not_exists");

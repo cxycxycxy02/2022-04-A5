@@ -2,16 +2,16 @@ package com.gatech.cs6310.control;
 
 import com.gatech.cs6310.dto.UserCommon;
 import com.gatech.cs6310.dto.UserResponse;
-import com.gatech.cs6310.entites.User;
 import com.gatech.cs6310.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class LoginController {
 
     @Autowired
@@ -19,25 +19,26 @@ public class LoginController {
 
     @PostMapping("/toLoginPage")
     @ResponseBody
-    public UserResponse toLoginPage(User user){
+    public UserResponse toLoginPage(@RequestBody UserCommon user){
+        System.out.println(user.toString());
         return loginService.passwordVerify(user.getAccount(), user.getPassword());
     }
 
     @PostMapping("/register")
     @ResponseBody
-    public UserResponse register(UserCommon user){
+    public UserResponse register(@RequestBody UserCommon user){
         return loginService.register(user);
     }
 
     @PostMapping("/deleteUser")
     @ResponseBody
-    public UserResponse deleteUser(UserCommon user){
+    public UserResponse deleteUser(@RequestBody UserCommon user){
         return loginService.deleteUser(user);
     }
 
     @PostMapping("/UpdateUserInfo")
     @ResponseBody
-    public UserResponse UpdateUserInfo(UserCommon user){
+    public UserResponse UpdateUserInfo(@RequestBody UserCommon user){
         return loginService.updateUserInfo(user);
     }
 

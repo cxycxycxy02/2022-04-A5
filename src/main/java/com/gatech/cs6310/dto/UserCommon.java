@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCommon extends User {
+public class UserCommon {
     private String role;
     private Integer credit;
     private Integer rating;
@@ -22,4 +22,9 @@ public class UserCommon extends User {
     private Drone assignDrone;
     private String StoreName;
     private String errorMessage;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String account;
+    private String password;
 }
