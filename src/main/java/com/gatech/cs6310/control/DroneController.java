@@ -34,7 +34,19 @@ public class DroneController {
 
     @PostMapping("/addDrone")
     @ResponseBody
-    public DroneResponse removeDrone(Drone drone){
+    public DroneResponse addDrone(@RequestBody Drone drone){
         return droneService.addDrone(drone);
+    }
+
+    @PostMapping("/inquiryAllDrones")
+    @ResponseBody
+    public DroneResponse inquiryAllDrones(){
+        return droneService.inquiryAllDrones();
+    }
+
+    @PostMapping("/updataDrone")
+    @ResponseBody
+    public DroneResponse updateDrone(@RequestBody Drone drone){
+        return droneService.updateDrone(drone);
     }
 }

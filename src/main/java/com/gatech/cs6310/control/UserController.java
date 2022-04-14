@@ -21,7 +21,6 @@ public class UserController {
     @PostMapping("/toLoginPage")
     @ResponseBody
     public UserResponse toLoginPage(@RequestBody UserCommon user){
-        System.out.println(user.toString());
         return userService.passwordVerify(user.getAccount(), user.getPassword());
     }
 

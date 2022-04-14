@@ -69,7 +69,7 @@ public class OrderService {
                 .totalWeight(this.computeWeight(lines).getTotalWeight())
                 .orderStatus(OrderStatus.UNPAID.name())
                 .build();
-        order = orderMapper.startOrder(order);
+        orderMapper.startOrder(order);
         for(Line line: lines){
             line.setOrderId(order.getOrderId());
             orderMapper.addLine(line);
@@ -102,7 +102,7 @@ public class OrderService {
             orderMapper.inquiryOrdersByOrderId(orderID);
             order.setPayTime(new Timestamp(System.currentTimeMillis()));
             order.setOrderStatus(OrderStatus.WAIT_DELIVER.name());
-            orderMapper.UpdateOrder(order);
+            orderMapper.updateOrder(order);
             user.setCredit(user.getCredit() - order.getTotalPrice());
             userMapper.userUpdate(user);
         } else {
@@ -128,7 +128,7 @@ public class OrderService {
             order.setOrderStatus(OrderStatus.SHIPPED.name());
             order.setDroneId(droneId);
             order.setPilotAccount(pilotAccount);
-            orderMapper.UpdateOrder(order);
+            orderMapper.updateOrder(order);
             drone.setPilotAccount(pilotAccount);
             drone.setLeftTrip(drone.getLeftTrip()-1);
             droneMapper.updateDrone(drone);
@@ -151,7 +151,7 @@ public class OrderService {
 
         Order order = orderMapper.inquiryOrdersByOrderId(orderID);
         order.setOrderStatus(OrderStatus.COMPLETED.name());
-        orderMapper.UpdateOrder(order);
+        orderMapper.updateOrder(order);
 
         UserCommon pilot = userMapper.userInquiryByAccount(order.getPilotAccount());
         pilot.setAssignDrone(null);

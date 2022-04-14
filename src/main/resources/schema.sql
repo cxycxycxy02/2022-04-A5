@@ -45,7 +45,20 @@ CREATE TABLE IF NOT EXISTS Drone(
 );
 
 CREATE TABLE IF NOT EXISTS Order_Table(
-    orderId varchar(30) AUTO_INCREMENT primary key,
+    orderId Integer(30) AUTO_INCREMENT primary key,
+    droneId int NULL,
+    totalPrice int NULL,
+    pilotAccount varchar(30),
+    customerAccount varchar(30),
+    storeName varchar(30),
+    totalWeight int NULL,
+    createTime Timestamp NULL,
+    payTime Timestamp NULL,
+    orderStatus varchar(30) NULL
+);
+
+CREATE TABLE IF NOT EXISTS History_Order(
+    orderId Integer(30) primary key,
     droneId int NULL,
     totalPrice int NULL,
     pilotAccount varchar(30),

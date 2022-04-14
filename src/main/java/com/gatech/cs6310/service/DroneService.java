@@ -40,7 +40,21 @@ public class DroneService {
 
     public DroneResponse addDrone(Drone drone){
         DroneResponse.DroneResponseBuilder droneResponse = DroneResponse.builder();
-        droneResponse.drone(droneMapper.inquiryDroneByDroneId(droneMapper.addDrone(drone)));
+        droneMapper.addDrone(drone);
+        droneResponse.drone(droneMapper.inquiryDroneByDroneId(drone.getDroneId()));
+        return droneResponse.build();
+    }
+
+    public DroneResponse inquiryAllDrones(){
+        DroneResponse.DroneResponseBuilder droneResponse = DroneResponse.builder();
+        droneResponse.droneList((droneMapper.inquiryAllDrones()));
+        return droneResponse.build();
+    }
+
+    public DroneResponse updateDrone(Drone drone){
+        DroneResponse.DroneResponseBuilder droneResponse = DroneResponse.builder();
+        droneMapper.updateDrone(drone);
+        droneResponse.drone(droneMapper.inquiryDroneByDroneId(drone.getDroneId()));
         return droneResponse.build();
     }
 }
