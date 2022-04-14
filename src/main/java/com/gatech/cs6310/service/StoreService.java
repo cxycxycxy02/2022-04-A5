@@ -11,14 +11,18 @@ import java.util.Objects;
 @Service
 public class StoreService {
 
+    private final StoreMapper storeMapper;
+
     @Autowired
-    private StoreMapper storeMapper;
+    public StoreService(StoreMapper storeMapper) {
+        this.storeMapper = storeMapper;
+    }
 
     public StoreResponse inquiryByStoreName(String StoreName){
         StoreResponse.StoreResponseBuilder storeResponseBuilder = StoreResponse.builder();
         Store store  = storeMapper.inquiryByStoreName(StoreName);
         if (Objects.isNull(store)){
-            storeResponseBuilder.errorMessage("ERROR:store_identifier_already_exists");
+            storeResponseBuilder.errorMessage("ERROR:store_identifier_not_exists");
         } else{
             storeResponseBuilder.store(store);
         }
@@ -34,10 +38,23 @@ public class StoreService {
     public StoreResponse addStore(Store store){
         StoreResponse.StoreResponseBuilder storeResponseBuilder = StoreResponse.builder();
         Store oldStore  = storeMapper.inquiryByStoreName(store.getStoreName());
-        if (Objects.nonNull(store)){
+        if (Objects.nonNull(oldStore)){
+            storeResponseBuilder.errorMessage("ERROR:store_identifier_already_exists");
+        } else{
+            storeMapper.addStore(store);
+            storeResponseBuilder.store(store);
+        }
+        return storeResponseBuilder.build();
+    }
+
+    public StoreResponse updateStore(Store store){
+        StoreResponse.StoreResponseBuilder storeResponseBuilder = StoreResponse.builder();
+        Store oldStore  = storeMapper.inquiryByStoreName(store.getStoreName());
+        if (Objects.isNull(oldStore)){
             storeResponseBuilder.errorMessage("ERROR:store_identifier_not_exists");
         } else{
-            storeResponseBuilder.store(storeMapper.addStore(store));
+            storeMapper.updateStore(store);
+            storeResponseBuilder.store(store);
         }
         return storeResponseBuilder.build();
     }

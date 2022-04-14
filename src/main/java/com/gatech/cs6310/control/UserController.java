@@ -2,6 +2,7 @@ package com.gatech.cs6310.control;
 
 import com.gatech.cs6310.dto.UserCommon;
 import com.gatech.cs6310.dto.UserResponse;
+import com.gatech.cs6310.encryption.AesUtil;
 import com.gatech.cs6310.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,10 @@ public class UserController {
         return userService.passwordVerify(user.getAccount(), user.getPassword());
     }
 
-    @PostMapping("/register")
+    @PostMapping("/adminRegister")
     @ResponseBody
-    public UserResponse register(@RequestBody UserCommon user){
-        return userService.register(user);
+    public UserResponse adminRegister(@RequestBody UserCommon user){
+        return userService.adminRegister(user);
     }
 
     @PostMapping("/deleteUser")
@@ -36,7 +37,7 @@ public class UserController {
         return userService.deleteUser(user);
     }
 
-    @PostMapping("/UpdateUserInfo")
+    @PostMapping("/updateUserInfo")
     @ResponseBody
     public UserResponse UpdateUserInfo(@RequestBody UserCommon user){
         return userService.updateUserInfo(user);
@@ -46,5 +47,11 @@ public class UserController {
     @ResponseBody
     public UserResponse userBulkInquiry(){
         return userService.userBulkInquiry();
+
+    }
+    @PostMapping("/register")
+    @ResponseBody
+    public UserResponse register(@RequestBody UserCommon user){
+        return userService.register(user);
     }
 }

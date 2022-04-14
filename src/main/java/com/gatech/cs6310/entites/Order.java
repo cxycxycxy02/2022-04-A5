@@ -1,7 +1,6 @@
 package com.gatech.cs6310.entites;
 
 
-import com.gatech.cs6310.model.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

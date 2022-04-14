@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/store")
 public class StoreController {
+    final StoreService storeService;
+
     @Autowired
-    StoreService storeService;
+    public StoreController(StoreService storeService) {
+        this.storeService = storeService;
+    }
 
     @PostMapping("/inquiryByStoreName")
     @ResponseBody
@@ -31,6 +35,12 @@ public class StoreController {
     @PostMapping("/addStore")
     @ResponseBody
     public StoreResponse addStore(@RequestBody Store store){
-        return storeService.bulkInquiryAllStore();
+        return storeService.addStore(store);
+    }
+
+    @PostMapping("/updateStore")
+    @ResponseBody
+    public StoreResponse updateStore(@RequestBody Store store){
+        return storeService.updateStore(store);
     }
 }

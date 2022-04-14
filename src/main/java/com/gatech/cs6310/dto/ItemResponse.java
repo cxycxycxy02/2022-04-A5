@@ -15,4 +15,5 @@ import java.util.List;
 public class ItemResponse {
     private List<Item> itemList;
     private String errorMessage;
+    private Item item;
 }

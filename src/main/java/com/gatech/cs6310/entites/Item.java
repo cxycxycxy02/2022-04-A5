@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Item {
     private String itemName;
     private Integer weight;
-    private Integer unit_price;
+    private Integer unitPrice;
     private String storeName;
 
 }

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//user admin(store crud)
 @Builder
 @Data
 @AllArgsConstructor

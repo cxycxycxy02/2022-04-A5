@@ -21,7 +21,6 @@ public class UserCommon {
     private Integer experience;
     private Integer assignDrone;
     private String StoreName;
-    private String errorMessage;
     private String firstName;
     private String lastName;
     private String phone;

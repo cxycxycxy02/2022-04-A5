@@ -13,11 +13,15 @@ import java.util.List;
 @Service
 public class DroneService {
 
-    @Autowired
-    DroneMapper droneMapper;
+    final DroneMapper droneMapper;
+
+    final OrderMapper orderMapper;
 
     @Autowired
-    OrderMapper orderMapper;
+    public DroneService(DroneMapper droneMapper, OrderMapper orderMapper) {
+        this.droneMapper = droneMapper;
+        this.orderMapper = orderMapper;
+    }
 
     public DroneResponse inquiryDronesByStore(String StoreName){
         DroneResponse.DroneResponseBuilder droneResponse = DroneResponse.builder();
@@ -30,15 +34,13 @@ public class DroneService {
         DroneResponse.DroneResponseBuilder droneResponse = DroneResponse.builder();
         if(orders.size() != 0){
             droneResponse.errorMessage("order_exist_drone_cant_remove");
-        } else {
-            droneResponse.drone((droneMapper.removeDrone(droneId)));
         }
         return droneResponse.build();
     }
 
     public DroneResponse addDrone(Drone drone){
         DroneResponse.DroneResponseBuilder droneResponse = DroneResponse.builder();
-        droneResponse.drone((droneMapper.addDrone(drone)));
+        droneResponse.drone(droneMapper.inquiryDroneByDroneId(droneMapper.addDrone(drone)));
         return droneResponse.build();
     }
 }

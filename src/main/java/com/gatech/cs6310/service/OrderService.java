@@ -5,9 +5,10 @@ import com.gatech.cs6310.dto.UserCommon;
 import com.gatech.cs6310.entites.Drone;
 import com.gatech.cs6310.entites.Line;
 import com.gatech.cs6310.entites.Order;
-import com.gatech.cs6310.entites.User;
+import com.gatech.cs6310.entites.Store;
 import com.gatech.cs6310.mapper.DroneMapper;
 import com.gatech.cs6310.mapper.OrderMapper;
+import com.gatech.cs6310.mapper.StoreMapper;
 import com.gatech.cs6310.mapper.UserMapper;
 import com.gatech.cs6310.model.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,18 @@ import java.util.Objects;
 @Service
 public class OrderService {
 
+    private final UserMapper userMapper;
+    private final OrderMapper orderMapper;
+    private final DroneMapper droneMapper;
+    private final StoreMapper storeMapper;
+
     @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private OrderMapper orderMapper;
-    @Autowired
-    private DroneMapper droneMapper;
+    public OrderService(UserMapper userMapper, OrderMapper orderMapper, DroneMapper droneMapper,StoreMapper storeMapper) {
+        this.userMapper = userMapper;
+        this.orderMapper = orderMapper;
+        this.droneMapper = droneMapper;
+        this.storeMapper = storeMapper;
+    }
 
 
     public OrderResponse computePrice(List<Line> lines, String userAccount) {
@@ -43,7 +50,7 @@ public class OrderService {
         return orderResponseBuilder.build();
     }
 
-    public OrderResponse computeWeight(List<Line> lines) {
+    private OrderResponse computeWeight(List<Line> lines) {
         OrderResponse.OrderResponseBuilder orderResponseBuilder = OrderResponse.builder();
         Integer result = 0;
         for (Line line : lines) {
@@ -141,17 +148,25 @@ public class OrderService {
 
     public OrderResponse completeOrder(Integer orderID){
         OrderResponse.OrderResponseBuilder orderResponse = OrderResponse.builder();
+
         Order order = orderMapper.inquiryOrdersByOrderId(orderID);
-        UserCommon pilot = userMapper.userInquiryByAccount(order.getPilotAccount());
-        Drone drone = droneMapper.inquiryDroneByDroneId(order.getDroneId());
         order.setOrderStatus(OrderStatus.COMPLETED.name());
         orderMapper.UpdateOrder(order);
-        drone.setPilotAccount(null);
-        drone.setLeftTrip(drone.getLeftTrip()-1);
-        droneMapper.updateDrone(drone);
+
+        UserCommon pilot = userMapper.userInquiryByAccount(order.getPilotAccount());
         pilot.setAssignDrone(null);
         pilot.setExperience(pilot.getExperience() + 1);
         userMapper.pilotUpdate(pilot);
+
+        Drone drone = droneMapper.inquiryDroneByDroneId(order.getDroneId());
+        drone.setPilotAccount(null);
+        drone.setLeftTrip(drone.getLeftTrip()-1);
+        droneMapper.updateDrone(drone);
+
+        Store store = storeMapper.inquiryByStoreName(order.getStoreName());
+        store.setRevenue(store.getRevenue()+order.getTotalPrice());
+        storeMapper.updateStore(store);
+
         return orderResponse.build();
     }
 }
