@@ -19,7 +19,7 @@ public class UserCommon {
     private String tax;
     private String license;
     private Integer experience;
-    private Drone assignDrone;
+    private Integer assignDrone;
     private String StoreName;
     private String errorMessage;
     private String firstName;

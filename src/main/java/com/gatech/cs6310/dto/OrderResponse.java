@@ -1,6 +1,6 @@
 package com.gatech.cs6310.dto;
 
-import com.gatech.cs6310.entites.Store;
+import com.gatech.cs6310.entites.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +12,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StoreResponse {
-    private Store store;
+public class OrderResponse {
+    private Integer totalPrice;
     private String errorMessage;
-    private List<Store> storeList;
+    private Integer totalWeight;
+    private Order order;
+    private List<Order> orderList;
+
 }

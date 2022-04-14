@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Mapper
-public interface LoginMapper {
+public interface UserMapper {
 
      @Select("select * from user where account = #{account,jdbcType = VARCHAR}")
      UserCommon userInquiryByAccount(@Param("account") String account);
@@ -27,4 +27,8 @@ public interface LoginMapper {
      //Todo
      @Update("select * from user where account = #{account,jdbcType = VARCHAR}")
      UserCommon userUpdate (@Param("account") UserCommon user);
+
+     //Todo
+     @Update("select * from user where account = #{account,jdbcType = VARCHAR}")
+     UserCommon pilotUpdate (@Param("account") UserCommon user);
 }

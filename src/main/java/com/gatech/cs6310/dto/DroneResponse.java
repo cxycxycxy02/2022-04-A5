@@ -1,6 +1,7 @@
 package com.gatech.cs6310.dto;
 
-import com.gatech.cs6310.entites.Store;
+import com.gatech.cs6310.entites.Drone;
+import com.gatech.cs6310.entites.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +13,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StoreResponse {
-    private Store store;
+public class DroneResponse {
+    private List<Drone> droneList;
+    private Drone drone;
     private String errorMessage;
-    private List<Store> storeList;
+
 }

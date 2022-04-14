@@ -30,4 +30,15 @@ public class StoreService {
         storeResponseBuilder.storeList(storeMapper.bulkInquiryAllStore());
         return storeResponseBuilder.build();
     }
+
+    public StoreResponse addStore(Store store){
+        StoreResponse.StoreResponseBuilder storeResponseBuilder = StoreResponse.builder();
+        Store oldStore  = storeMapper.inquiryByStoreName(store.getStoreName());
+        if (Objects.nonNull(store)){
+            storeResponseBuilder.errorMessage("ERROR:store_identifier_not_exists");
+        } else{
+            storeResponseBuilder.store(storeMapper.addStore(store));
+        }
+        return storeResponseBuilder.build();
+    }
 }
