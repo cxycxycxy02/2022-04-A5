@@ -43,7 +43,12 @@ public class UserController {
         return userService.updateUserInfo(user);
     }
 
-    @PostMapping("/userBulkInquiry")
+    @PostMapping("/userInquiryByStoreName")
+    @ResponseBody
+    public UserResponse userInquiryByStoreName(String StoreName){
+        return userService.userInquiryByStoreName(StoreName);
+    }
+    @PostMapping("/userBulkInquiryByStoreName")
     @ResponseBody
     public UserResponse userBulkInquiry(){
         return userService.userBulkInquiry();

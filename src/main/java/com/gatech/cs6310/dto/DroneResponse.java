@@ -17,5 +17,4 @@ public class DroneResponse {
     private List<Drone> droneList;
     private Drone drone;
     private String errorMessage;
-
 }

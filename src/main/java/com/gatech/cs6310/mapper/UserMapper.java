@@ -13,13 +13,16 @@ public interface UserMapper {
      @Select("select * from user where account = #{account,jdbcType=VARCHAR}")
      UserCommon userInquiryByAccount(@Param("account") String account);
 
+     @Select("select * from user where storeName = #{storeName,jdbcType=VARCHAR}")
+     List<UserCommon>  userInquiryByStoreName(String storeName);
+
      @Select("select * from user")
      List<UserCommon> userBulkInquiry();
 
-     @Insert("insert into USER (account, firstName, lastName, phone,password, role, credit, rating, tax,license, experience,assignDrone,StoreName) values ("
+     @Insert("insert into USER (account, firstName, lastName, phone,password, role, credit, rating, ssn,license, experience,assignDrone,StoreName,salary) values ("
              + "#{account,jdbcType=VARCHAR},#{firstName,jdbcType=VARCHAR},#{lastName,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},"
              +"#{password,jdbcType=VARCHAR},#{role,jdbcType=VARCHAR},#{credit,jdbcType=INTEGER},#{rating,jdbcType=INTEGER},"
-             +"#{tax,jdbcType=VARCHAR},#{license,jdbcType=VARCHAR},#{experience,jdbcType=INTEGER},#{assignDrone,jdbcType=INTEGER},#{StoreName,jdbcType=VARCHAR})")
+             +"#{ssn,jdbcType=VARCHAR},#{license,jdbcType=VARCHAR},#{experience,jdbcType=INTEGER},#{assignDrone,jdbcType=INTEGER},#{StoreName,jdbcType=VARCHAR},#{salary,jdbcType=INTEGER},)")
      void adminInsert (UserCommon user);
 
      @Delete("Delete * from user where account = #{account,jdbcType=VARCHAR}")
@@ -28,7 +31,7 @@ public interface UserMapper {
      @Update("update user set account = #{account,jdbcType=VARCHAR},"
              +"firstName = #{firstName,jdbcType=VARCHAR},lastName = #{lastName,jdbcType=VARCHAR}, phone = #{phone,jdbcType=VARCHAR}, "
              +"password = #{password,jdbcType=VARCHAR},role = #{role,jdbcType=VARCHAR},credit = #{credit,jdbcType=INTEGER},rating = #{rating,jdbcType=INTEGER} "
-             +",tax = #{tax,jdbcType=VARCHAR},license = #{license,jdbcType=VARCHAR},experience=#{experience,jdbcType=INTEGER},assignDrone=#{assignDrone,jdbcType=INTEGER}"
+             +",ssn = #{ssb,jdbcType=VARCHAR},license = #{license,jdbcType=VARCHAR},experience=#{experience,jdbcType=INTEGER},assignDrone=#{assignDrone,jdbcType=INTEGER},salary=#{salary,jdbcType=INTEGER}"
              +",StoreName = #{StoreName,jdbcType=VARCHAR}"
      )
      void userUpdate (UserCommon user);

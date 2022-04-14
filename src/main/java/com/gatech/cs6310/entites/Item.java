@@ -14,5 +14,4 @@ public class Item {
     private Integer weight;
     private Integer unitPrice;
     private String storeName;
-
 }

@@ -14,6 +14,7 @@ public class Line {
     private Integer quantity;
     private Integer unitPrice;
     private String itemName;
+    private String StoreName;
     private Integer weight;
     private Integer orderId;
     public Integer computeTotalWeight(){
@@ -22,5 +23,4 @@ public class Line {
     public Integer computeTotalPrice(){
         return this.quantity*this.unitPrice;
     }
-
 }

@@ -22,8 +22,8 @@ public class ItemController {
 
     @PostMapping("/inquiryItemsByStore")
     @ResponseBody
-    public ItemResponse inquiryItemsByStore(String store){
-        return itemService.inquiryItemsByStore(store);
+    public ItemResponse inquiryItemsByStore(String storeName){
+        return itemService.inquiryItemsByStore(storeName);
     }
 
     @PostMapping("/addItem")

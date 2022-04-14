@@ -87,4 +87,10 @@ public class UserService {
         userResponse.userList(userMapper.userBulkInquiry());
         return userResponse.build();
     }
+
+    public UserResponse userInquiryByStoreName(String storeName){
+        UserResponse.UserResponseBuilder userResponse = UserResponse.builder();
+        userResponse.userList(userMapper.userInquiryByStoreName(storeName));
+        return userResponse.build();
+    }
 }
